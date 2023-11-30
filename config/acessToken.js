@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const { google } = require('googleapis');
 
 const { C_ID, C_HIDE, REDIRECT, REFRESH_TOKEN } = process.env;

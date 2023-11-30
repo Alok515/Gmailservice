@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const nodeMailer = require('nodemailer');
 const getAccessToken = require('./acessToken');
 

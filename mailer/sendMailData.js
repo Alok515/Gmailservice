@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const sendMailConfig = require('../config/sendMailConfig');
 const User = require('../schema/user');
 const Sent = require('../schema/sent');
