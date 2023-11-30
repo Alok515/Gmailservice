@@ -10,5 +10,6 @@ routes.get('/v1/list', listMail);
 routes.get('/v1/read/:id', readMail);
 routes.get('/v1/del/:id', deleteMail);
 routes.post('/v1/send/', sendMail);
+//added post method
 
 module.exports = routes;
