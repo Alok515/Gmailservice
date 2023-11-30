@@ -18,7 +18,7 @@ const readMail = async (req, res) => {
         }, {
             isDeleted: true,
         });
-        if(deletedata)console.log("Mail mmarked as delete in db");
+        if(deletedata)console.log("Mail marked as delete in db");
         else console.log("unable to mark delete in db");
         return res.json({
             "Message": "Message deleted",
