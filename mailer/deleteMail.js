@@ -12,17 +12,20 @@ const readMail = async (req, res) => {
         const url = `${Gmail_url}${Gmail}/messages/${req.params.id}`;
         const config = configAxios('DELETE', url, token);
         const results = await axios(config);
-        cosole.log(JSON.stringify(results.data));
+        console.log(JSON.stringify(results.data));
         const deletedata = await Mail.findOneAndUpdate({
             mailId: req.params.id,
         }, {
             isDeleted: true,
         })
+        if(deletedata)console.log(deletedata);
+        else console.log("unable to update");
         return res.json({
             "Message": "Message deleted",
             "MessagesId": req.params.id
         });
     } catch (error) {
+        console.log(error);
         return res.json({ error: error });
     }
 }

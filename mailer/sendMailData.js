@@ -18,7 +18,7 @@ const sendMailData  = async (req, res) => {
             toMail: mail,
             sub: data.subject,
             msg: data.text,
-            user: user_id
+            user: user._id
         });
         if(dbData){
             console.log("data Saved in Db");
