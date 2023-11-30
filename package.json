@@ -1,0 +1,23 @@
+{
+  "name": "gamilapipro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "functions-framework --target=GmailApi"
+  },
+  "author": "Alok",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "googleapis": "^128.0.0",
+    "mongoose": "^8.0.2",
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
