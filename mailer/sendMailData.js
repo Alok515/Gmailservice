@@ -12,13 +12,13 @@ const sendMailData  = async (req, res) => {
             text: req.body.msg || "Hello from Node",
         }
 
-        const user = await User.findOne(process.env.Gmail)
+        const user = await User.findOne({usermail:process.env.Gmail})
         const result = await sendMailConfig(mail,data);
         const dbData = await Sent.create({
             toMail: mail,
             sub: data.subject,
             msg: data.text,
-            user: user_id
+            user: user._id
         });
         if(dbData){
             console.log("data Saved in Db");
