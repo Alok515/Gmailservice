@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "functions-framework --target=GmailApi"
+    "start": "functions-framework --target=GmailApi",
+    "dev": "nodemon functions-framework --target=GmailApi"
   },
   "author": "Alok",
   "license": "ISC",
@@ -13,10 +14,12 @@
     "axios": "^1.6.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "express-oauth2-jwt-bearer": "^1.6.0",
     "googleapis": "^128.0.0",
     "mongoose": "^8.0.2",
-    "nodemailer": "^6.9.7"
+    "nodemailer": "^6.9.7",
+    "query-string": "^8.1.0",
+    "request": "^2.88.2",
+    "url-parse": "^1.5.10"
   },
   "devDependencies": {
     "dotenv": "^16.3.1"

@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 const sendMailConfig = require('../config/sendMailConfig');
 const User = require('../schema/user');
 const Sent = require('../schema/sent');
@@ -12,8 +12,9 @@ const sendMailData  = async (req, res) => {
             text: req.body.msg || "Hello from Node",
         }
 
-        const user = await User.findOne({usermail:process.env.Gmail})
-        const result = await sendMailConfig(mail,data);
+        const user = await User.findOne({usermail:req.app.locals.user});
+        const acessToken = req.app.locals.token;
+        const result = await sendMailConfig(mail,data, acessToken, user);
         const dbData = await Sent.create({
             toMail: mail,
             sub: data.subject,
@@ -27,6 +28,10 @@ const sendMailData  = async (req, res) => {
             msg: result
         });
     } catch (error) {
+        if(error.response.status === 401){
+            console.log("handle 401 here");
+            return res.redirect("/login");
+    }
         console.error(error.message);
     }
 }

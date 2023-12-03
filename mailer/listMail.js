@@ -1,18 +1,19 @@
-//require('dotenv').config();
+require('dotenv').config();
 const configAxios = require('../config/axiosConfig');
-const accessToken = require('../config/acessToken');
+const accessToken = require('../controller/acessToken');
 const axios = require('axios');
 const User = require('../schema/user');
 const Mail = require('../schema/mail');
 
-const { Gmail_url, Gmail } = process.env;
+const { Gmail_url } = process.env;
 
 const listMail = async (req, res) => {
     try {
-        const { token } = await accessToken();
-        const url = `${Gmail_url}${Gmail}/threads?maxResults=100`;
-        const user = await User.findOne({userMail:Gmail});
-        console.log(user._id);
+        const userMail = req.app.locals.user;
+        const token = req.app.locals.token;
+        const url = `${Gmail_url}me/threads?maxResults=100`;
+        const user = await User.findOne({userMail:userMail});
+        //console.log(user._id);
         const config = configAxios('get', url, token);
         const results = await axios(config);
         console.log(JSON.stringify(results.data));
@@ -23,7 +24,7 @@ const listMail = async (req, res) => {
                 user:user._id,
             }
         });
-        console.log(maildata);
+        //console.log(maildata);
         maildata.map(mail => {
             Mail.findOne({mailId:mail.mailId})
                 .then(d => {
@@ -41,8 +42,11 @@ const listMail = async (req, res) => {
         
         return res.json(results.data);
     } catch (error) {
-        console.log(error);
-        return res.json({ error: "Some Error Occured" });
+        if(error.response.status === 401){
+            console.log("handle 401 here");
+            return res.redirect("/login");
+    }
+        return res.json({ error: "Some Error Occured", status: error.response.status});
     }
 }
 

@@ -1,6 +1,6 @@
-//require('dotenv').config();
+require('dotenv').config();
 const configAxios = require('../config/axiosConfig');
-const accessToken = require('../config/acessToken');
+const accessToken = require('../controller/acessToken');
 const axios = require('axios');
 
 const { Gmail_url, Gmail } = process.env;

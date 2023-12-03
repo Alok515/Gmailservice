@@ -1,21 +1,23 @@
-//require('dotenv').config();
+require('dotenv').config();
 const nodeMailer = require('nodemailer');
-const getAccessToken = require('./acessToken');
+const getAccessToken = require('../controller/acessToken');
+const Token = require('../schema/token');
 
 const { C_ID, C_HIDE, REFRESH_TOKEN } = process.env;
 
-const sendMailConfig = async(toMail, data)=>{
+const sendMailConfig = async(toMail, data, accessToken, userMail)=>{
     try {
-        
-    const accessToken = await getAccessToken();
+    const refreshToken = await Token.findOne({
+        user: userMail
+    }).token;
     const transport = nodeMailer.createTransport({
         service: 'gmail',
         auth: {
             type: 'OAUTH2',
-            user: "mr.alok.mailbox@gmail.com",
+            user: userMail,
             clientId: C_ID,
             clientSecret: C_HIDE,
-            refreshToken: REFRESH_TOKEN,
+            refreshToken: refreshToken,
             accessToken: accessToken
         }
     });
