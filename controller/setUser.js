@@ -29,7 +29,7 @@ const setUser = async (req, res) => {
     console.log(req.query.code);
     const code = req.query.code;
     const tokens = await oauth2Client.getToken(code);
-    req.app.locals.token = tokens.tokens.access_token;
+    req.session.token = tokens.tokens.access_token;
     try {
         const responsedata = await axios.get('https://www.googleapis.com/gmail/v1/users/me/profile', {
             headers: {
@@ -58,12 +58,12 @@ const setUser = async (req, res) => {
             if(newUser) console.log('newUser created successfully');
         }
         
-        req.app.locals.user = responsedata.data.emailAddress;
+        req.session.user = responsedata.data.emailAddress;
         //console.log(tokens.tokens.access_token);
         //console.log(responsedata.data);
         const d = JSON.stringify(responsedata.data);
         res.json({
-            user: req.app.locals.user,
+            user: req.session.user,
         });
     } catch (error) {
         console.log(error);

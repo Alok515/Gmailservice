@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./config/MongooseConnect');
 db();
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const urlparse = require('url-parse');
 //const queryParser = require('query-string');
 /*const {
@@ -21,7 +23,9 @@ app.use(cors());
     tokenSigningAlg: Algorithm
 });*/
 
-const errorHandler = 
+app.use(cookieParser());
+app.use(session({secret: 'LONG LONGG LONG SECRET IS THIS SJSKjjsjs'}));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

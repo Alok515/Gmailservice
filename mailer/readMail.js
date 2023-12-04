@@ -6,7 +6,7 @@ const { Gmail_url, Gmail } = process.env;
 
 const readMail = async (req, res) => {
     try {
-        const token = req.app.locals.token;
+        const token = req.session.token;
         const url = `${Gmail_url}me/messages/${req.params.id}`;
         const config = configAxios('get', url, token);
         const results = await axios(config);

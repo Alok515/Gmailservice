@@ -12,8 +12,8 @@ const sendMailData  = async (req, res) => {
             text: req.body.msg || "Hello from Node",
         }
 
-        const user = await User.findOne({usermail:req.app.locals.user});
-        const acessToken = req.app.locals.token;
+        const user = await User.findOne({usermail:req.session.user});
+        const acessToken = req.session.token;
         const result = await sendMailConfig(mail,data, acessToken, user);
         const dbData = await Sent.create({
             toMail: mail,

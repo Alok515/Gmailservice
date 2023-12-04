@@ -9,8 +9,8 @@ const { Gmail_url } = process.env;
 
 const listMail = async (req, res) => {
     try {
-        const userMail = req.app.locals.user;
-        const token = req.app.locals.token;
+        const userMail = req.session.user;
+        const token = req.session.token;
         const url = `${Gmail_url}me/threads?maxResults=100`;
         const user = await User.findOne({userMail:userMail});
         //console.log(user._id);

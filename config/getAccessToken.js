@@ -2,7 +2,7 @@ const Token = require('../schema/token');
 const oauth2Client = require('./configoAuth');
 
 const genrateToken =async () => {
-    const user = req.app.locals.user;
+    const user = req.session.user;
     try {
         const refreshToken =await Token.findOne({
             user: user

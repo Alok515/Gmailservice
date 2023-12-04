@@ -11,7 +11,7 @@ route.get('/login', (req, res) =>{
 });
 route.get('/callback',setuser);
 route.get('/test', (req, res) =>{
-    console.log(req.app.locals.token);
+    console.log(req.session.token);
     res.send("test token");
 })
 
